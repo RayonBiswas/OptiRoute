@@ -225,10 +225,7 @@ Questions or ideas? Open an [issue](https://github.com/RayonBiswas/OptiRoute/iss
 cd C:\Rayon\Projects\optiroute
 
 py -3.12 -m venv venv
-
-# WAIT THIS IS HAVING ISSUE - python -m venv venv
 .\venv\Scripts\Activate.ps1
-dont do !!!!!! cd backend, just run from the optiroute only
 pip install -r requirements.txt
 python -m uvicorn main:app --reload
 
