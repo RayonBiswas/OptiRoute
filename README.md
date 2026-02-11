@@ -217,64 +217,58 @@ Questions or ideas? Open an [issue](https://github.com/RayonBiswas/OptiRoute/iss
 
 ---
 
+---
+
 **Built with ❤️ for safer commutes in Mumbai.**
-# 🔹 Step 1: Backend Setup & Run (FastAPI)
 
-# Open Terminal 1:
+## 🛠️ Local Run (Windows & Linux/macOS)
 
+Below are concise, copy-paste-ready steps for running the project locally. Use PowerShell on Windows and Bash on Linux/macOS. Ensure you're in the repository root (`OptiRoute`).
+
+### 1) Backend (FastAPI)
+
+PowerShell (Windows):
+```powershell
 cd C:\Rayon\Projects\optiroute
-
 py -3.12 -m venv venv
 .\venv\Scripts\Activate.ps1
-pip install -r requirements.txt
-python -m uvicorn main:app --reload
+pip install -r backend/requirements.txt
+# create backend/.env with ORS_KEY (see below)
+python -m uvicorn backend.main:app --reload
+```
 
+Bash (Linux/macOS):
+```bash
+cd /path/to/OptiRoute
+python3.12 -m venv venv
+source venv/bin/activate
+pip install -r backend/requirements.txt
+# create backend/.env with ORS_KEY (see below)
+python -m uvicorn backend.main:app --reload
+```
 
-✅ Backend will run at:
+Backend will be available at: `http://127.0.0.1:8000` (OpenAPI UI: `/docs`)
 
-http://127.0.0.1:8000
+### 2) Frontend (React + Vite)
 
-
-(Optional check)
-
-http://127.0.0.1:8000/docs
-
-
-👉 Keep this terminal running
-
-# 🔹 Step 2: Frontend Setup & Run (React + Vite)
-
-# Open Terminal 2:
-
-cd C:\Rayon\Projects\optiroute\frontend
+```bash
+cd frontend
 npm install
 npm run dev
+```
 
+Frontend dev server will be available at: `http://localhost:5173`
 
-✅ Frontend will run at:
+### 3) Environment variables
 
-http://localhost:5173
+Create `backend/.env` with the following content (use your ORS key):
+```env
+ORS_KEY=your_openrouteservice_api_key
+```
 
-🔑 Environment Variable Setup
+After changing `backend/.env`, restart the backend server.
 
-Create file:
-
-backend/.env
-
-
-Add:
-
-ORS_API_KEY=your_openrouteservice_api_key_here
-
-
-⚠️ Restart backend after changing .env
-
-🧠 Notes (Important)
-
-Do NOT activate Python venv in frontend
-
-Backend must be running before requesting routes
-
-Use two terminals (backend + frontend)
-
-If ports are busy, stop previous instances
+### 4) Quick tips
+- Use two separate terminals (one for backend, one for frontend).
+- Do not activate the Python virtualenv in the frontend terminal.
+- If ports are occupied, stop previous servers or change ports.
