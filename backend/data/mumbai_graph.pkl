@@ -1,5 +1,0 @@
-import osmnx as ox
-import pickle
-
-G = ox.graph_from_place("Mumbai, India", network_type="drive")
-pickle.dump(G, open("backend/data/mumbai_graph.pkl", "wb"))
