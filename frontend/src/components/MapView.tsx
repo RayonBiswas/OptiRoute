@@ -212,7 +212,7 @@ const MapView: React.FC<Props> = ({
                 <strong>{route.label}</strong><br />
                 Distance: {(route.distance_m / 1000).toFixed(1)} km<br />
                 Duration: {Math.round(route.duration_s / 60)} min<br />
-                Risk Score: {route.risk_score.toFixed(2)}
+                Risk Score: {route.score?.toFixed(2) ?? "N/A"}
                 {route.explanation ? (
                   <div style={{ marginTop: 6, color: "#333" }}>{route.explanation}</div>
                 ) : null}
