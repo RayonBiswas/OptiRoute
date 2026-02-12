@@ -1,4 +1,28 @@
-lat,lon,severity,name
+lat,lon,severity,source_ward,waterlogging_spots
+18.9210,72.8345,0.333,Colaba,7
+18.9510,72.8340,0.190,Sandhurst Road,4
+18.9615,72.8160,0.333,Marine Lines,7
+18.9710,72.8190,0.571,Grant Road,12
+18.9936,72.8339,0.286,Byculla,6
+19.0008,72.8409,0.143,Parel,3
+19.0260,72.8400,0.333,Matunga,7
+19.0183,72.8421,0.476,Dadar,10
+18.9891,72.8195,0.952,Elphinstone,20
+19.0544,72.8400,0.429,Bandra,9
+19.0854,72.8280,0.476,Khar/Santacruz,10
+19.1185,72.8662,0.238,Andheri (East),5
+19.1100,72.8400,0.571,Andheri (West),12
+19.1515,72.8560,0.810,Goregaon,17
+19.1826,72.8560,0.429,Malad,9
+19.2300,72.8570,0.429,Kandivali,9
+19.2308,72.8568,1.000,Borivali,21
+19.2859,72.8365,0.333,Dahisar,7
+19.0600,72.8790,0.905,Kurla,19
+19.0525,72.9059,0.143,Chembur M/E,3
+19.0639,72.8997,0.048,Chembur (West),1
+19.0800,72.9130,0.381,Ghatkopar,8
+19.1390,72.9510,0.762,Bhandup,16
+19.1700,72.9560,0.571,Mulund,12lat,lon,severity,name
 19.0056,72.8417,0.95,Hindmata
 19.1197,72.8464,0.90,Andheri Subway
 19.0286,72.8553,0.88,Kings Circle
