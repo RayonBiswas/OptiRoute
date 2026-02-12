@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { MapContainer, TileLayer, Polyline, Marker, Popup, useMap } from "react-leaflet";
+import { MapContainer, TileLayer, Polyline, Marker, Popup, useMap, Circle } from "react-leaflet";
 import L, { LatLngExpression } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "leaflet.heat";
@@ -138,6 +138,61 @@ function HeatmapLayer({
   return null;
 }
 
+// Helper function to get color based on intensity
+function getColorForIntensity(intensity: number): string {
+  if (intensity < 0.2) return "#0000ff";   // Blue - low risk
+  if (intensity < 0.4) return "#00ff00";   // Green - low-medium
+  if (intensity < 0.6) return "#ffff00";   // Yellow - medium
+  if (intensity < 0.8) return "#ff8800";   // Orange - high
+  return "#ff0000";                         // Red - very high
+}
+
+// Component to render risk circles as visible symbols
+function RiskCirclesLayer({
+  points,
+  show
+}: {
+  points: HeatmapPoint[];
+  show: boolean;
+}) {
+  if (!show || points.length === 0) return null;
+
+  return (
+    <>
+      {points.map((point, idx) => {
+        const color = getColorForIntensity(point.intensity);
+        const radius = 200 + point.intensity * 1000; // Scale radius with intensity (200-1200m)
+        const fillOpacity = 0.3 + point.intensity * 0.4; // More intense = more opaque
+        
+        return (
+          <Circle
+            key={`risk-${idx}`}
+            center={[point.lat, point.lng]}
+            radius={radius}
+            color={color}
+            fillColor={color}
+            weight={2}
+            opacity={0.6}
+            fillOpacity={fillOpacity}
+          >
+            <Popup>
+              <div style={{ fontSize: "12px" }}>
+                <strong>🚨 Flood Risk</strong><br />
+                Lat: {point.lat.toFixed(5)}<br />
+                Lng: {point.lng.toFixed(5)}<br />
+                Intensity: {(point.intensity * 100).toFixed(0)}%<br />
+                <span style={{ color: color, fontWeight: "bold" }}>
+                  {point.intensity > 0.7 ? "HIGH RISK" : point.intensity > 0.5 ? "MEDIUM RISK" : "LOW RISK"}
+                </span>
+              </div>
+            </Popup>
+          </Circle>
+        );
+      })}
+    </>
+  );
+}
+
 const MapView: React.FC<Props> = ({
   routes,
   showHeatmap,
@@ -223,6 +278,7 @@ const MapView: React.FC<Props> = ({
       })}
 
       <HeatmapLayer points={heatmapPoints} show={showHeatmap} />
+      <RiskCirclesLayer points={heatmapPoints} show={showHeatmap} />
     </MapContainer>
   );
 };

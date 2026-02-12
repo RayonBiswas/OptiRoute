@@ -541,3 +541,18 @@ async def get_routes(payload: RouteRequest) -> RoutesResponse:
         item.explanation = "; ".join(parts)
 
     return RoutesResponse(routes=routes, heatmap_points=heatmap_points)
+
+
+@app.get("/api/heatmap")
+async def get_heatmap_data():
+    """
+    Returns heatmap showing flood risk based on live rainfall and waterlogging data.
+    Independent endpoint for fetching heatmap without requiring a route search.
+    """
+    # Fetch real-time rainfall data
+    rainfall_grid = await fetch_rainfall_mm_near_mumbai()
+    
+    # Generate heatmap points based on current rainfall and waterlogging preference map
+    heatmap_points = generate_heatmap_points([], rainfall_grid)
+    
+    return {"heatmap_points": heatmap_points}

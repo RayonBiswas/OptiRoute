@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import MapView from "./components/MapView";
 import { LatLng, Route, HeatmapPoint, RoutesResponse } from "./types";
-import { fetchRoutes } from "./api";
+import { fetchRoutes, fetchHeatmap } from "./api";
 
 const DEFAULT_ORIGIN: LatLng = { lat: 19.076, lng: 72.8777 };
 
@@ -57,6 +57,24 @@ const App: React.FC = () => {
       },
       { enableHighAccuracy: true, timeout: 8000 }
     );
+  }, []);
+
+  // Load heatmap data on startup and refresh periodically
+  useEffect(() => {
+    const loadHeatmap = async () => {
+      try {
+        const points = await fetchHeatmap();
+        setHeatmapPoints(points);
+      } catch (err) {
+        console.error("Failed to fetch heatmap:", err);
+      }
+    };
+
+    loadHeatmap();
+
+    // Refresh heatmap every 5 minutes
+    const interval = setInterval(loadHeatmap, 5 * 60 * 1000);
+    return () => clearInterval(interval);
   }, []);
 
   const handleSearch = async () => {
