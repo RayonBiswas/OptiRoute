@@ -20,6 +20,10 @@ OptiRoute is a full-stack flood- and risk-aware route optimizer that combines re
 - **Docker Support** — Run locally or in production via Docker Compose
 - **CI/CD Ready** — GitHub Actions workflow included
 
+## 🎥 Demo Video
+
+[![Watch Demo](https://img.youtube.com/vi/OsxWot6POnk/0.jpg)](https://youtu.be/OsxWot6POnk)
+
 ## 🚀 Quick Start
 
 ### Prerequisites
